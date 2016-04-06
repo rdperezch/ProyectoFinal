@@ -1,0 +1,250 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition 
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition 
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition 
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition 
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition 
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition 
+#:import NoTransition kivy.uix.screenmanager.NoTransition 
+
+<Titulo@Label> 
+	text_size: self.size
+	color: 192,192,192,.7
+	halign: 'center'
+	height: "200dp"
+	valign: 'top' 
+	font_size: 20
+<Boton@Button>:  #botones Formato centrico default
+	color: 1,2,1
+	background_color: 192,192,192,.7
+	size_hint: (0.250, 0.1)
+	pos_hint:{'center_x': .5,'center_y': .5} 
+<BotonAtras@Button>:  #Boton atras REGRESA A TU PAGINA ANTERIOR
+	text: 'Atras'
+	background_color: 130, 0, 0, 0.5
+	color: (0,0,0,1)
+	size_hint:(0.250, 0.1)
+	pos_hint:{'center_x': .2,'center_y': .1}	
+	
+
+ScreenManagement:
+	transition: SlideTransition()
+	Intro:
+	Registro:
+	Menu:
+	Materias:
+	Calendario:
+	Perfil:
+	Eventos:
+	
+	
+<Intro>:
+	name: "intro"
+	username_b: username_i
+    password_b: password_i
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,33)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "UIP"
+	BoxLayout:
+		orientation: "vertical"
+		height: "100dp"
+		size_hint_y: .8
+		GridLayout:
+			row_default_height: "40dp"
+			row_force_default: True
+			spacing: "10dp"
+			padding: "30dp"
+			cols: 2
+			Label:
+				text: "Username:"
+			TextInput:
+				id: username_i
+			Label:
+				text: "Password:"
+			TextInput:
+				id: password_i
+				password: True
+	Boton:
+		text: "Login"
+		pos_hint:{'center_x': .5,'center_y': .350} 
+		on_press: 
+			root.login()
+			app.root.current = "menu"
+	Boton:
+		text: "Registrarse"
+		size_hint: (0.350, 0.1)
+		pos_hint:{'center_x': .5,'center_y': .250} 
+		on_press: app.root.current = "registro"
+			
+<Registro>:
+	name: "registro"
+	nombre_b: nombre_i
+	apellido_b: apellido_i
+	nacimiento_b: nacimiento_i
+	cedula_b: cedula_i
+	carrera_b: 	carrera_i
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,33)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "Registro de DATOS"
+	BoxLayout:
+		orientation: "vertical"
+		height: "100dp"
+		size_hint_y: .8
+		GridLayout:
+			row_default_height: "30dp"
+			row_force_default: True
+			spacing: "10dp"
+			padding: "30dp"
+			cols: 2
+			Label:
+				text: "Nombre:"
+			TextInput:
+				id: nombre_i
+			Label:
+				text: "Apellido:"
+			TextInput:
+				id: apellido_i
+			Label:
+				text: "F Nac:"
+			TextInput:
+				id: nacimiento_i
+			Label:
+				text: "Cedula:"
+			TextInput:
+				id: cedula_i
+			Label:
+				text: "Te vas a quedar?:"
+			TextInput:
+				id: carrera_i
+	Boton: 
+		text: "Registrarme"
+		size_hint:(0.3, 0.1)
+		color: 1,1,1
+		background_color: 192,192,192,.7
+		pos_hint:{'center_x': .7,'center_y': .1}
+		on_press: 
+			app.root.current = "menu"
+			root.regis()
+	BotonAtras:
+		on_press: app.root.current = "intro"
+
+
+<Menu>:
+	name: "menu"
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,15)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "Menu"
+	Boton:
+		text: "Materias"
+		pos_hint:{'center_x': .7,'center_y': .5} 
+		on_press: app.root.current = "materias"
+	Boton:
+		text: "Perfil"
+		pos_hint:{'center_x': .3,'center_y': .5} 
+		on_press: app.root.current = "perfil"
+	Boton:
+		text: "Calendario"
+		pos_hint:{'center_x': .3,'center_y': .3} 
+		on_press: app.root.current = "calendario"
+	Boton:
+		text: "Eventos"
+		pos_hint:{'center_x': .7,'center_y': .3}
+		on_press: app.root.current = "calendario"
+	Boton: 
+		text: "X"
+		size_hint:(0.1, 0.1)
+		color: 1,1,1
+		background_color: 0, 0, 0, 0.5
+		pos_hint:{'center_x': .9,'center_y': .9}
+		on_press: app.root.current = "intro"
+		
+
+<Materias>:
+	name: "materias"
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,33)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "Materias"
+	BotonAtras:
+		on_press: app.root.current = "menu"
+
+<Calendario>:
+	name: "calendario"
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,33)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "K-LENHDAHRIO"		
+    BotonAtras:
+		on_press: app.root.current = "menu"
+
+<Perfil>:
+	name: "perfil"
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,33)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "Perfil Estudiantil"
+	BotonAtras:
+		on_press: app.root.current = "menu"
+
+<Eventos>:
+	name: "eventos"
+	AnchorLayout:
+		padding: 20
+		canvas:
+			Color:
+				rgba: (0,0,3,14)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		Titulo:
+			font_size: 30
+			text: "EVENTOS"
+	BotonAtras:
+		on_press: app.root.current = "menu"
+
+
+
