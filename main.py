@@ -2,8 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
-import requests
-from ConeccionDB import insertar
+from ConeccionDB import insertar, consultarlogin
 
 
 class ScreenManagement(ScreenManager):
@@ -15,8 +14,9 @@ class Intro(Screen):
     password_b = ObjectProperty()
 
     def login(self):
-        print(self.username_b.text)
-        print(self.password_b.text)
+        cerd = (self.username_b.text)
+        passw = (self.password_b.text)
+        consultarlogin(cerd, passw)
 
 
 class Registro(Screen):
@@ -48,7 +48,6 @@ class Calendario(Screen):
 
 
 class Perfil(Screen):
-    def
     pass
 
 
