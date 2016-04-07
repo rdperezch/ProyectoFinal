@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
+import requests
+from ConeccionDB import insertar
 
 
 class ScreenManagement(ScreenManager):
@@ -25,11 +27,12 @@ class Registro(Screen):
     carrera_b = ObjectProperty()
 
     def regis(self):
-        print(self.nombre_b.text)
-        print(self.apellido_b.text)
-        print(self.nacimiento_b.text)
-        print(self.cedula_b.text)
-        print(self.carrera_b.text)
+        nombre = (self.nombre_b.text)
+        apellido = (self.apellido_b.text)
+        nacimiento = (self.nacimiento_b.text)
+        cedula  = (self.cedula_b.text)
+        carrera = (self.carrera_b.text)
+        insertar(cedula, nombre, carrera, apellido, nacimiento)
 
 
 class Menu(Screen):
@@ -45,6 +48,7 @@ class Calendario(Screen):
 
 
 class Perfil(Screen):
+    def
     pass
 
 
