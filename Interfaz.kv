@@ -15,8 +15,9 @@
 	font_size: 20
 <Boton@Button>:  #botones Formato centrico default
 	color: 1,2,1
-	background_color: 192,192,192,.7
-	size_hint: (0.250, 0.1)
+	background_normal: "data/whitebutt.jpg"
+	background_down: "data/whitebutt.jpg"
+	size_hint: (0.350, 0.1)
 	pos_hint:{'center_x': .5,'center_y': .5} 
 <BotonAtras@Button>:  #Boton atras REGRESA A TU PAGINA ANTERIOR
 	text: 'Atras'
@@ -41,23 +42,25 @@ ScreenManagement:
 	name: "intro"
 	username_b: username_i
     password_b: password_i
+	canvas.before:
+		BorderImage:
+			texture: self.background_image.texture
+			pos: self.pos
+			size: self.size
+	BoxLayout:
+		padding: 10
+		AsyncImage: 
+			source: "data/logo_uip.png"
+			pos: root.x, root.y+300
+			size: 0.2,0.4
 	AnchorLayout:
 		padding: 20
-		canvas:
-			Color:
-				rgba: (0,0,3,33)
-			Rectangle:
-				pos: self.pos
-				size: self.size
-		Titulo:
-			font_size: 30
-			text: "UIP"
 	BoxLayout:
 		orientation: "vertical"
-		height: "100dp"
-		size_hint_y: .8
+		height: "50dp"
+		size_hint_y: .7
 		GridLayout:
-			row_default_height: "40dp"
+			row_default_height: "30dp"
 			row_force_default: True
 			spacing: "10dp"
 			padding: "30dp"
@@ -73,14 +76,14 @@ ScreenManagement:
 				password: True
 	Boton:
 		text: "Login"
-		pos_hint:{'center_x': .5,'center_y': .350} 
+		pos_hint:{'center_x': .5,'center_y': .325} 
 		on_press: 
 			root.login()
 			app.root.current = "menu"
 	Boton:
 		text: "Registrarse"
 		size_hint: (0.350, 0.1)
-		pos_hint:{'center_x': .5,'center_y': .250} 
+		pos_hint:{'center_x': .5,'center_y': .200} 
 		on_press: app.root.current = "registro"
 			
 <Registro>:
