@@ -34,6 +34,11 @@
 	color: (0,0,0,1)
 	size_hint:(0.250, 0.1)
 	pos_hint:{'center_x': .150,'center_y': .1}	
+<stats@Label>:
+	pos_hint:{'center_x': .8,'center_y': .4}
+<log@Label>
+	font_size: 10
+	pos_hint:{'center_x': .820,'center_y': .980}
 	
 
 ScreenManagement:
@@ -45,6 +50,7 @@ ScreenManagement:
 	Calendario:
 	Perfil:
 	Eventos:
+	Registro2:
 	
 	
 <Intro>:
@@ -86,13 +92,14 @@ ScreenManagement:
 			TextInput:
 				id: password_i
 				password: True
+	stats:
+		id: stats
 	Boton:
 		text: "Conectar"
 		size_hint: (0.3, 0.1)
 		pos_hint:{'center_x': .5,'center_y': .350} 
 		on_press: 
 			root.login()
-			app.root.current = "menu"
 	Boton:
 		text: "Registrarse"
 		size_hint: (0.3, 0.1)
@@ -103,9 +110,9 @@ ScreenManagement:
 	name: "registro"
 	nombre_b: nombre_i
 	apellido_b: apellido_i
-	nacimiento_b: nacimiento_i
+	seg_nombre_b: seg_nombre_i
 	cedula_b: cedula_i
-	carrera_b: 	carrera_i
+	seg_apellido_b: seg_apellido_i
 	canvas.before:
 		BorderImage:
 			texture: self.background_image.texture
@@ -134,42 +141,46 @@ ScreenManagement:
 			cols: 2
 			Label:
 				bold: True
-				text: "Nombre:"
-			TextInput:
-				id: nombre_i
-			Label:
-				bold: True
-				text: "Apellido:"
-			TextInput:
-				id: apellido_i
-			Label:
-				bold: True
-				text: "F Nac:"
-			TextInput:
-				id: nacimiento_i
-			Label:
-				bold: True
 				text: "Cedula:"
 			TextInput:
 				id: cedula_i
 			Label:
 				bold: True
-				text: "Carrera:"
+				text: "Primer Nombre:"
 			TextInput:
-				id: carrera_i
+				id: nombre_i
+			Label:
+				bold: True
+				text: "Segundo Nombre:"
+			TextInput:
+				id: seg_nombre_i
+			Label:
+				bold: True
+				text: "Primer Apellido:"
+			TextInput:
+				id: apellido_i
+			Label:
+				bold: True
+				text: "Segundo Apellido:"
+			TextInput:
+				id: seg_apellido_i
 	Boton: 
 		text: "Registrarme"
 		size_hint:(0.3, 0.1)
 		pos_hint:{'center_x': .7,'center_y': .1}
 		on_press: 
-			app.root.current = "menu"
 			root.regis()
 	BotonAtras:
 		on_press: app.root.current = "intro"
+		
+<Registro2>:
+	name: "registro2"
 
 
 <Menu>:
 	name: "menu"
+	on_enter:
+		root.login()
 	canvas.before:
 		BorderImage:
 			texture: self.background_image.texture
@@ -186,6 +197,8 @@ ScreenManagement:
 		padding: 30
 		Titulo:
 			text: "Menu"
+	log:
+		id: log
 	BotonM:
 		bold: True
 		text: "Materias"
@@ -212,7 +225,10 @@ ScreenManagement:
 		size_hint:(0.2, 0.1)
 		background_color: 1, 0, 0, 0.5
 		pos_hint:{'center_x': .9,'center_y': .9}
-		on_press: app.root.current = "intro"
+		on_press: 
+			app.root.current = "intro"
+			root.logout()
+		
 		
 
 <Materias>:
@@ -260,6 +276,9 @@ ScreenManagement:
 
 <Perfil>:
 	name: "perfil"
+	grid: Data
+	on_enter:
+		root.consultar()
 	canvas.before:
 		BorderImage:
 			texture: self.background_image.texture
@@ -273,11 +292,26 @@ ScreenManagement:
 			size: (root.width/4, root.height/4)
 			source: "data/logo_uip2ALL.png"
 	AnchorLayout:
-		padding: 20
+		padding: 5
 		Titulo:
 			text: "[color=00BFFF]Perfil[/color]"
+		BoxLayout:
+			orientation: "vertical"
+			height: "200dp"
+			size_hint_y: None
+			GridLayout:
+				row_default_height: "5dp"
+				spacing: "5dp"
+				padding: "10dp"
+				cols: 5
+				id: Data
 	BotonAtras:
 		on_press: app.root.current = "menu"
+	Boton:
+		text: "Actualizar"
+		on_press: root.Borrar()
+		on_release: root.consultar()
+		pos_hint:{'center_x': .5,'center_y': .2} 
 
 <Eventos>:
 	name: "eventos"
